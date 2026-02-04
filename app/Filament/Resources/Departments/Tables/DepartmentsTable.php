@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Departments\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\ColorColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -22,6 +23,7 @@ class DepartmentsTable
                     ->counts('employees')
                     ->badge()
                     ->label('Employees'),
+                ColorColumn::make('color'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

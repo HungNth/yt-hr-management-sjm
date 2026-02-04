@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Departments\Schemas;
 
+use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -23,6 +24,8 @@ class DepartmentForm
                         Select::make('manager_id')
                             ->relationship('manager', 'name')
                             ->default(null),
+                        ColorPicker::make('color')
+                            ->label('Color'),
                         Textarea::make('description')
                             ->default(null)
                             ->columnSpanFull(),
