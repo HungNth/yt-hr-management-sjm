@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Positions\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
@@ -20,10 +21,16 @@ class PositionsTable
                     ->searchable(),
                 TextColumn::make('min_salary')
                     ->numeric()
+                    ->money('USD')
                     ->sortable(),
                 TextColumn::make('max_salary')
                     ->numeric()
+                    ->money('USD')
                     ->sortable(),
+                TextColumn::make('employees_count')
+                    ->counts('employees')
+                    ->badge()
+                    ->label('Employees'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -38,6 +45,7 @@ class PositionsTable
             ])
             ->recordActions([
                 EditAction::make(),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

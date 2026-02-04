@@ -17,12 +17,17 @@ class PositionForm
                     ->required(),
                 Select::make('department_id')
                     ->relationship('department', 'name')
+                    ->searchable()
+                    ->preload()
                     ->required(),
                 TextInput::make('min_salary')
                     ->required()
+                    ->prefix('$')
                     ->numeric(),
                 TextInput::make('max_salary')
                     ->required()
+                    ->prefix('$')
+                    ->gte('min_salary')
                     ->numeric(),
                 Textarea::make('description')
                     ->default(null)
