@@ -20,7 +20,7 @@ class PerformanceReviewResource extends Resource
 {
     protected static ?string $model = PerformanceReview::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::Star;
 
     public static function form(Schema $schema): Schema
     {

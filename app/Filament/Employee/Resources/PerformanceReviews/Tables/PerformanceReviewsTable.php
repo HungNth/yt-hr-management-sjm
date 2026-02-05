@@ -8,12 +8,16 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class PerformanceReviewsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(function (Builder $query) {
+                return $query->where('user_id', auth()->user()->id);
+            })
             ->columns([
                 TextColumn::make('user.name')
                     ->searchable(),
@@ -37,7 +41,12 @@ class PerformanceReviewsTable
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('overall_rating')
-                    ->numeric()
+                    ->badge()
+                    ->colors([
+                        'danger' => fn($state) => $state < 5,
+                        'warning' => fn($state) => $state >= 5 && $state < 7,
+                        'success' => fn($state) => $state >= 7,
+                    ])
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
