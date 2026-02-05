@@ -68,7 +68,7 @@ class PayrollsTable
                 TextColumn::make('user.name')
                     ->searchable(),
                 TextColumn::make('user.employee_id')
-                    ->label('Employee Code')
+                    ->label('Employee ID')
                     ->searchable(),
                 TextColumn::make('month')
                     ->searchable(),
