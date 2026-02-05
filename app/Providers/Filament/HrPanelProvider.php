@@ -28,6 +28,7 @@ class HrPanelProvider extends PanelProvider
             ->id('hr')
             ->path('hr')
             ->login()
+            ->passwordReset()
             ->brandLogo(asset('images/logo.svg'))
             ->favicon(asset('images/logo.svg'))
             ->colors([
