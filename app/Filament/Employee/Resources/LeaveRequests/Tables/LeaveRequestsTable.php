@@ -2,18 +2,23 @@
 
 namespace App\Filament\Employee\Resources\LeaveRequests\Tables;
 
+use App\Models\LeaveRequest;
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class LeaveRequestsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(function (Builder $query) {
+                return $query->where('user_id', auth()->user()->id);
+            })
             ->columns([
                 TextColumn::make('user.name')
                     ->searchable(),
@@ -30,8 +35,7 @@ class LeaveRequestsTable
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge(),
-                TextColumn::make('approved_by')
-                    ->numeric()
+                TextColumn::make('approver.name')
                     ->sortable(),
                 TextColumn::make('approved_at')
                     ->dateTime()
@@ -50,11 +54,14 @@ class LeaveRequestsTable
             ])
             ->recordActions([
                 ViewAction::make(),
-                EditAction::make(),
+                EditAction::make()
+                    ->visible(fn(LeaveRequest $record) => $record->status === 'pending'),
+                DeleteAction::make()
+                    ->visible(fn(LeaveRequest $record) => $record->status === 'pending'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    // DeleteBulkAction::make(),
                 ]),
             ]);
     }
