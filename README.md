@@ -1,59 +1,127 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# HR Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Hệ thống quản lý nhân sự (HRM) được xây dựng trên nền tảng Laravel, cung cấp các tính năng quản lý toàn diện cho doanh
+nghiệp.
 
-## About Laravel
+## Tổng quan
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Dự án này là một hệ thống HRM hoàn chỉnh với hai nhóm người dùng chính:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **HR Admin**: Quản lý toàn bộ hệ thống, phê duyệt đơn từ, quản lý nhân viên
+- **Employee**: Nhân viên có thể xem thông tin cá nhân, check-in/out, gửi đơn xin nghỉ
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tính năng chính
 
-## Learning Laravel
+### Quản lý tổ chức
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- **Phòng ban (Departments)**: Tạo và quản lý các phòng ban trong công ty
+- **Chức vụ (Positions)**: Quản lý chức vụ, cấp bậc nhân viên
+- **Người dùng (Users)**: Quản lý tài khoản và thông tin nhân viên
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Chấm công
 
-## Laravel Sponsors
+- **Check-in/Check-out**: Nhân viên check-in và check-out theo ca làm việc
+- **Báo cáo công**: Theo dõi và xuất báo cáo thời gian làm việc
+- **Lịch sử chấm công**: Xem chi tiết lịch sử chấm công theo ngày/tháng
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Xin nghỉ
 
-### Premium Partners
+- **Loại nghỉ (Leave Types)**: Định nghĩa các loại nghỉ phép (nghỉ phép năm, nghỉ ốm, nghỉ không lương...)
+- **Đơn xin nghỉ**: Nhân viên gửi đơn, HR phê duyệt
+- **Theo dõi ngày nghỉ**: Tự động tính toán số ngày nghỉ còn lại
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Bảng lương (Payroll)
 
-## Contributing
+- **Quản lý lương**: Tạo và cập nhật bảng lương nhân viên
+- **Chi tiết lương**: Xem chi tiết các khoản thu nhập và khấu trừ
+- **Lịch sử lương**: Theo dõi thay đổi lương theo thời gian
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Đánh giá hiệu suất (Performance Review)
 
-## Code of Conduct
+- **Đánh giá nhân viên**: HR tạo và quản lý các đợt đánh giá
+- **Nội dung đánh giá**: Đánh giá theo tiêu chí cụ thể
+- **Lịch sử đánh giá**: Lưu trữ kết quả đánh giá qua các kỳ
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Phân quyền & Bảo mật
 
-## Security Vulnerabilities
+- **Role-based Access Control**: Phân quyền theo vai trò với Filament Shield
+- **Two Panel**: Tách biệt HR Admin và Employee panel
+- **Widget Dashboard**: Thống kê trực quan theo từng vai trò
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Tech Stack
+
+### Backend
+
+- **PHP 8.2** - Server-side scripting language
+- **Laravel 12** - PHP Framework mạnh mẽ và hiện đại
+- **Filament 4** - Admin Panel Builder đẹp và nhanh
+- **Filament Shield** - Role-based Access Control (RBAC)
+
+### Frontend
+
+- **TailwindCSS 4** - CSS Framework utility-first
+- **Vite** - Next generation frontend tooling
+- **Alpine.js** - Lightweight JavaScript framework (tích hợp sẵn trong Filament)
+
+### Database
+
+- **MySQL** - Cơ sở dữ liệu chính (production)
+- **SQLite** - Cơ sở dữ liệu nhẹ (development)
+
+### Development & Testing
+
+- **Laravel Pint** - Code style fixer theo PSR-12
+- **Pest** - Testing framework hiện đại cho Laravel
+- **Laravel Sail** - Docker development environment
+- **Faker** - Thư viện tạo dữ liệu giả cho testing
+- **Mockery** - Mocking library cho unit testing
+- **Laravel Pail** - Real-time error tracking
+
+## Cấu trúc dự án
+
+```
+app/
+├── Filament/
+│   ├── Hr/                      # Module dành cho HR Admin
+│   │   ├── Resources/           # Quản lý: Attendances, LeaveRequests, Payrolls, PerformanceReviews
+│   │   └── Widgets/             # Thống kê dashboard
+│   ├── Employee/                # Module dành cho Nhân viên
+│   │   ├── Resources/           # Xem thông tin: Attendances, LeaveRequests, Payrolls, PerformanceReviews
+│   │   └── Pages/               # Trang check-in/out
+│   └── Resources/               # Tài nguyên chung
+│       ├── Departments/         # Quản lý phòng ban
+│       ├── Positions/           # Quản lý chức vụ
+│       └── Users/               # Quản lý người dùng
+```
+
+## Database Schema
+
+### Models chính
+
+| Model               | Mô tả                             |
+|---------------------|-----------------------------------|
+| `User`              | Thông tin người dùng và nhân viên |
+| `Department`        | Phòng ban                         |
+| `Position`          | Chức vụ                           |
+| `Attendance`        | Bản ghi chấm công                 |
+| `LeaveRequest`      | Đơn xin nghỉ                      |
+| `LeaveType`         | Loại nghỉ phép                    |
+| `Payroll`           | Bảng lương                        |
+| `PerformanceReview` | Đánh giá hiệu suất                |
+
+### Quan hệ
+
+```
+User belongsTo Department
+User belongsTo Position
+User hasMany Attendance
+User hasMany LeaveRequest
+User hasMany Payroll
+User hasMany PerformanceReview
+LeaveRequest belongsTo LeaveType
+LeaveRequest belongsTo User (approver)
+```
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MIT
